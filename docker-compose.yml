@@ -1,0 +1,24 @@
+version: "3"
+services:
+
+    test_database:
+        image: mysql:5.7
+        environment:
+          MYSQL_DATABASE: testdb
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_ROOT_HOST: '%'
+        ports:
+          - 3306:3306
+
+    test_application:
+        build: .
+        environment:
+          MYSQL_ADDRESS: test_database
+          MYSQL_DATABASE: testdb
+          MYSQL_PORT: 3306
+          MYSQL_USERNAME: root
+          MYSQL_PASSWORD: root
+        expose:
+          - 8080
+        depends_on:
+          - test_database
