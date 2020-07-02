@@ -1,5 +1,13 @@
 version: "3"
 services:
+    test_web:
+        image: nginx
+        ports:
+          - 80:80
+        volumes:
+          - ./nginx/conf.d:/etc/nginx/conf.d
+        depends_on:
+          - test_application
 
     test_database:
         image: mysql:5.7
